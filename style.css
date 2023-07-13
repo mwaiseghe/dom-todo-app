@@ -1,0 +1,101 @@
+* {
+    margin:0;
+    padding: 0;
+}
+
+body {
+    background-color: hsl(235, 21%, 11%);
+    background-image: url("./images/bg-desktop-light.jpg");
+    background-repeat: no-repeat;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-card {
+    width: 50%;
+    height: 80%;
+
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.todoForm {
+    background-color: hsl(235, 19%, 35%);
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+}
+
+.todoForm input[type="text"] {
+    width: 100%;
+    height: 100%;
+    background-color: hsl(235, 19%, 35%);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.todoForm input[type="radio"] {
+    background-color: hsl(235, 19%, 35%);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.5rem;
+    margin-left: 20px;
+}
+
+.items {
+    background-color: hsl(235, 19%, 35%);
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.single-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid hsl(236, 9%, 61%);
+}
+
+.single-item input[type="radio"] {
+    background-color: hsl(235, 19%, 35%);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.single-item p {
+    color: white;
+    font-size: 1.5rem;
+    margin-left: 20px;
+}
+
+.lower {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.task-status {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
