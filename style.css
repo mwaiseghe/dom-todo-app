@@ -7,6 +7,8 @@ body {
     background-color: hsl(235, 21%, 11%);
     background-image: url("./images/bg-desktop-light.jpg");
     background-repeat: no-repeat;
+    font-family: 'Josefin Sans', sans-serif;
+    color: white;
 }
 
 .container {
@@ -91,6 +93,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: hsl(235, 19%, 35%);
 }
 
 .task-status {
@@ -98,4 +101,17 @@ body {
     flex-direction: row;
     justify-content: space-between;
     
+}
+
+.completed p{
+    text-decoration: line-through;
+    
+}
+
+.items-left {
+    padding-left: 10px;
+}
+
+.smaller {
+    font-size: 15px;
 }

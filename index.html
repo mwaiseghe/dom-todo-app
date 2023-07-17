@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
   <link rel="stylesheet" href="style.css">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
   <title>Frontend Mentor | Todo app</title>
@@ -31,21 +33,32 @@
 
     <div class="items">
      
+      
     
     </div>
-    <div class="lower">
+    <div class="single-item task-status">
       <div class="items-left">
-        <p>5 items left</p>
+        <p><span class="smaller">
+          0 items left
+        </span></p>
       </div>
 
       <div class="task-status">
-        <p>All</p>
-        <p>Active</p>
-        <p>Completed</p>
+        <p><span class="smaller">
+          All
+        </span></p>
+        <p><span class="smaller">
+          Active
+        </span></p>
+        <p><span class="smaller">
+          Completed
+        </span></p>
       </div>
 
       <div class="clear">
-        <p>Clear Completed</p>
+        <p><span class="smaller">
+          Clear Completed
+        </span></p>
       </div>
     </div>
 
