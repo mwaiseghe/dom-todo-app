@@ -11,6 +11,16 @@ let todoList = localStorage.getItem('todoList') ? JSON.parse(localStorage.getIte
 
 let id = localStorage.getItem('id') ? JSON.parse(localStorage.getItem('id')) : 0;
 
+let completedItems = todoList.filter((item,index)=>{
+    let compItems = item.completed == true;
+    console.log(compItems);
+    return compItems
+})
+
+let remainingItems = (todoList.length) - (completedItems.length)
+console.log(remainingItems);
+
+
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
   if(todoInput.value !== '') {
@@ -68,7 +78,7 @@ function displayTodo() {
   });
   itemsLeft.innerHTML = `
   <p><span class="smaller">
-    ${todoList.length} items left
+    ${remainingItems} items left
   </span></p>
   `;
 }
@@ -80,6 +90,7 @@ items.addEventListener('click', (e) => {
     console.log(e.target.nextElementSibling);
     if (e.target.nextElementSibling.classList.contains('completed')) {
       e.target.nextElementSibling.classList.remove('completed');
+      
     } else {
       e.target.nextElementSibling.classList.add('completed');
     }
