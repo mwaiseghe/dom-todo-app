@@ -11,15 +11,6 @@ let todoList = localStorage.getItem('todoList') ? JSON.parse(localStorage.getIte
 
 let id = localStorage.getItem('id') ? JSON.parse(localStorage.getItem('id')) : 0;
 
-let completedItems = todoList.filter((item,index)=>{
-    let compItems = item.completed == true;
-    console.log(compItems);
-    return compItems
-})
-
-let remainingItems = (todoList.length) - (completedItems.length)
-console.log(remainingItems);
-
 
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -78,22 +69,21 @@ function displayTodo() {
   });
   itemsLeft.innerHTML = `
   <p><span class="smaller">
-    ${remainingItems} items left
+    ${todoList.length} items left
   </span></p>
   `;
 }
 
+
 items.addEventListener('click', (e) => {
   if (e.target.type === 'checkbox') {
-    console.log(e.target.id);
     toggle(e.target.id);
-
-    console.log(e.target.nextElementSibling);
     if (e.target.nextElementSibling.classList.contains('completed')) {
-      e.target.nextElementSibling.classList.remove('completed');
-
+        e.target.nextElementSibling.classList.remove('completed');
+        getItemsLeft()
     } else {
       e.target.nextElementSibling.classList.add('completed');
+      getItemsLeft()
     }
   }
   if (e.target.tagName === 'IMG') {
@@ -101,11 +91,13 @@ items.addEventListener('click', (e) => {
   }
 });
 
+
 function toggle(id) {
   todoList.map((item) => {
     if (item.id == id) {
       item.completed = !item.completed;
     }
+    getItemsLeft()
     return item;
   });
   localStorage.setItem('todoList', JSON.stringify(todoList));
@@ -128,7 +120,7 @@ function displayActive() {
   });
   itemsLeft.innerHTML = `
   <p><span class="smaller">
-    ${todoList.length} items left
+    ${itemsLeft.length} items left
   </span></p>
   `;
 }
@@ -151,7 +143,7 @@ function displayCompleted() {
   });
   itemsLeft.innerHTML = `
   <p><span class="smaller">
-    ${todoList.length} items left
+    ${itemsLeft.length} items left
   </span></p>
   `;
 }
@@ -206,4 +198,5 @@ mainCard.addEventListener('drop', (e) => {
 }
 
 );
+
 
