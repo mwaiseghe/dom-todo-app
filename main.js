@@ -1,58 +1,163 @@
-let todoForm = document.querySelector(".todoForm");
-let ifChecked = document.querySelector("#ifChecked");
-let items = document.querySelector(".items");
-let itemsLeft = document.querySelector(".items-left p");
+let todoForm = document.querySelector('.todoForm');
+let todoInput = document.querySelector('#todoInput');
+let items = document.querySelector('.items');
+let itemsLeft = document.querySelector('.items-left');
+let taskStatus = document.querySelector('.task-status');
+let clear = document.querySelector('.clear');
+let ifChecked = document.querySelector('#ifChecked');
 
-// Add event listener to the form submit
-todoForm.addEventListener("submit", function (e) {
+let todoList = localStorage.getItem('todoList') ? JSON.parse(localStorage.getItem('todoList')) : [];
+let id = localStorage.getItem('id') ? JSON.parse(localStorage.getItem('id')) : 0;
+
+todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  let input = document.querySelector("#todoInput");
-  let text = input.value;
-  let newItem = document.createElement("div");
-  newItem.classList.add("single-item");
-  if (ifChecked.checked==true){
-    console.log("True");
-    newItem.classList.add("completed");
-
+  if(todoInput.value !== '') {
+    let ifChecked = document.querySelector('#ifChecked');
+    console.log(ifChecked.checked);
+    if(ifChecked.checked) {
+      todoList.push({
+        id: id,
+        name: todoInput.value,
+        completed: true
+      });
+    } else {
+      todoList.push({
+        id: id,
+        name: todoInput.value,
+        completed: false
+      });
+    }
+    id++;
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+    todoInput.value = '';
   }
-  newItem.innerHTML = `
-        <input type="radio" class="item-radio">
-        <p>${text}</p>
-        `;
-  items.appendChild(newItem);
-  input.value = "";
-  updateItemsLeft();
-  clearFormInput();
+  todoForm.reset();
+  displayTodo();
 });
 
-// Add event listener to the items container
-function ifItemChecked(){
-    items.addEventListener("click", function (e) {
-        if (e.target.classList.contains("item-radio")) {
-          let item = e.target.parentElement;
-          item.classList.toggle("completed");
-          updateItemsLeft();
-        }
-      });
+function displayTodo() {
+  stored_items = localStorage.getItem('todoList');
+  items.innerHTML = '';
+  todoList = JSON.parse(stored_items);
+  todoList.forEach((item) => {
+    let checked = item.completed ? 'checked' : null;
+    if (item.completed) {
+      items.innerHTML += `
+      <div class="single-item">
+        <input type="checkbox" name="" id="${item.id}" ${checked}>
+        <p class="completed item-p">${item.name}</p>
+        <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+      </div>
+      `;
+    } else {
+      items.innerHTML += `
+      <div class="single-item">
+        <input type="checkbox" name="" id="${item.id}" ${checked}>
+        <p class="item-p">${item.name}</p>
+        <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+      </div>
+      `;
+    }
+  });
+  itemsLeft.innerHTML = `
+  <p><span class="smaller">
+    ${todoList.length} items left
+  </span></p>
+  `;
 }
-ifItemChecked()
 
-// Function to update the count of items left
-function updateItemsLeft() {
-  let completedCount = document.querySelectorAll(".single-item.completed").length;
-  let remainingItems = document.querySelectorAll(".single-item").length - completedCount;
-  completed_items = document.querySelectorAll(".single-item.completed p")
-  
-  console.log(completed_items);
-  itemsLeft.textContent = `${remainingItems} item${remainingItems !== 1 ? "s" : ""} left`;
+items.addEventListener('click', (e) => {
+  if (e.target.type === 'checkbox') {
+    toggle(e.target.id);
+
+    console.log(e.target.nextElementSibling);
+    if (e.target.nextElementSibling.classList.contains('completed')) {
+      e.target.nextElementSibling.classList.remove('completed');
+    } else {
+      e.target.nextElementSibling.classList.add('completed');
+    }
+  }
+  if (e.target.tagName === 'IMG') {
+    deleteItem(e.target.id);
+  }
+});
+
+function toggle(id) {
+  todoList.forEach((item) => {
+    if (item.id == id) {
+      item.completed = !item.completed;
+    }
+  });
 }
 
-let singleItems = document.querySelectorAll(".single-item");
-let singleItemsCount = singleItems.length;
-console.log(singleItemsCount);
-
-
-function clearFormInput(){
-  let theForm = todoForm
-  theForm.reset();
+function displayActive() {
+  stored_items = localStorage.getItem('todoList');
+  items.innerHTML = '';
+  todoList = JSON.parse(stored_items);
+  todoList.forEach((item) => {
+    if (!item.completed) {
+      items.innerHTML += `
+      <div class="single-item">
+        <input type="checkbox" name="" id="${item.id}">
+        <p class="item-p">${item.name}</p>
+        <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+      </div>
+      `;
+    }
+  });
+  itemsLeft.innerHTML = `
+  <p><span class="smaller">
+    ${todoList.length} items left
+  </span></p>
+  `;
 }
+
+
+function displayCompleted() {
+  stored_items = localStorage.getItem('todoList');
+  items.innerHTML = '';
+  todoList = JSON.parse(stored_items);
+  todoList.forEach((item) => {
+    if (item.completed) {
+      items.innerHTML += `
+      <div class="single-item">
+        <input type="checkbox" name="" id="${item.id}" checked>
+        <p class="completed item-p">${item.name}</p>
+        <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+      </div>
+      `;
+    }
+  });
+  itemsLeft.innerHTML = `
+  <p><span class="smaller">
+    ${todoList.length} items left
+  </span></p>
+  `;
+}
+
+displayTodo();
+
+let clearCompleted = document.querySelector('.clear');
+clearCompleted.addEventListener('click', () => {
+  todoList = todoList.filter((item) => {
+    return !item.completed;
+  });
+  localStorage.setItem('todoList', JSON.stringify(todoList));
+  displayTodo();
+});
+
+let filterCompleted = document.querySelector('.completed-bottom');
+filterCompleted.addEventListener('click', () => {
+  displayCompleted();
+});
+
+let displayAll = document.querySelector('.all-bottom');
+displayAll.addEventListener('click', () => {
+  displayTodo();
+});
+
+let displayActiveBtn = document.querySelector('.all-active');
+displayActiveBtn.addEventListener('click', () => {
+  displayActive();
+});
+

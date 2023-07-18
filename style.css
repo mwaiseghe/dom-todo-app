@@ -103,7 +103,7 @@ body {
     
 }
 
-.completed p{
+.completed{
     text-decoration: line-through;
     
 }
