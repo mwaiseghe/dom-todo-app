@@ -85,12 +85,13 @@ function displayTodo() {
 
 items.addEventListener('click', (e) => {
   if (e.target.type === 'checkbox') {
+    console.log(e.target.id);
     toggle(e.target.id);
 
     console.log(e.target.nextElementSibling);
     if (e.target.nextElementSibling.classList.contains('completed')) {
       e.target.nextElementSibling.classList.remove('completed');
-      
+
     } else {
       e.target.nextElementSibling.classList.add('completed');
     }
@@ -101,11 +102,13 @@ items.addEventListener('click', (e) => {
 });
 
 function toggle(id) {
-  todoList.forEach((item) => {
+  todoList.map((item) => {
     if (item.id == id) {
       item.completed = !item.completed;
     }
+    return item;
   });
+  localStorage.setItem('todoList', JSON.stringify(todoList));
 }
 
 function displayActive() {
