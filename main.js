@@ -161,3 +161,24 @@ displayActiveBtn.addEventListener('click', () => {
   displayActive();
 });
 
+function deleteItem(id) {
+  todoList = todoList.filter((item) => {
+    return item.id != id;
+  });
+  localStorage.setItem('todoList', JSON.stringify(todoList));
+  displayTodo();
+}
+
+let mainCard = document.querySelector('.main-card');
+mainCard.addEventListener('dragover', (e) => {
+  e.preventDefault();
+}
+);
+
+mainCard.addEventListener('drop', (e) => {
+  e.preventDefault();
+  deleteItem(e.dataTransfer.getData('text'));
+}
+
+);
+
