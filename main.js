@@ -6,7 +6,9 @@ let taskStatus = document.querySelector('.task-status');
 let clear = document.querySelector('.clear');
 let ifChecked = document.querySelector('#ifChecked');
 
+
 let todoList = localStorage.getItem('todoList') ? JSON.parse(localStorage.getItem('todoList')) : [];
+
 let id = localStorage.getItem('id') ? JSON.parse(localStorage.getItem('id')) : 0;
 
 todoForm.addEventListener('submit', (e) => {
@@ -39,6 +41,11 @@ function displayTodo() {
   stored_items = localStorage.getItem('todoList');
   items.innerHTML = '';
   todoList = JSON.parse(stored_items);
+  if (todoList.length === 0) {
+    todoList = [];
+  }
+
+  
   todoList.forEach((item) => {
     let checked = item.completed ? 'checked' : null;
     if (item.completed) {
@@ -135,7 +142,11 @@ function displayCompleted() {
   `;
 }
 
-displayTodo();
+if (todoList.length === 0) {
+  todoList = [];
+}else {
+  displayTodo();
+}
 
 let clearCompleted = document.querySelector('.clear');
 clearCompleted.addEventListener('click', () => {
