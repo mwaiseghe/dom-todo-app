@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -37,6 +37,7 @@ body {
     display: flex;
     flex-direction: row;
     border-radius: 10px;
+    width: 100%;
 }
 
 .todoForm input[type="text"] {
@@ -48,6 +49,7 @@ body {
     color: white;
     font-size: 1.5rem;
     padding: 1rem;
+    border-radius: 20px;
 }
 
 .todoForm input[type="radio"] {
@@ -114,4 +116,16 @@ body {
 
 .smaller {
     font-size: 15px;
+}
+
+.task-status{
+    background-color: hsl(235, 19%, 35%);
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+
+@media screen {
+    
 }
