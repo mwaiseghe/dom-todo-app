@@ -67,11 +67,7 @@ function displayTodo() {
       `;
     }
   });
-  itemsLeft.innerHTML = `
-  <p><span class="smaller">
-    ${todoList.length} items left
-  </span></p>
-  `;
+  getItemsLeft();
 }
 
 
@@ -118,11 +114,7 @@ function displayActive() {
       `;
     }
   });
-  itemsLeft.innerHTML = `
-  <p><span class="smaller">
-    ${itemsLeft.length} items left
-  </span></p>
-  `;
+  getItemsLeft()
 }
 
 
@@ -141,11 +133,7 @@ function displayCompleted() {
       `;
     }
   });
-  itemsLeft.innerHTML = `
-  <p><span class="smaller">
-    ${itemsLeft.length} items left
-  </span></p>
-  `;
+  getItemsLeft();
 }
 
 if (todoList.length === 0) {
@@ -198,5 +186,22 @@ mainCard.addEventListener('drop', (e) => {
 }
 
 );
+
+function getItemsLeft() {
+  let itemsLeft = document.querySelector('.items-left');
+  let count = 0;
+  todoList.forEach((item) => {
+    if (!item.completed) {
+      count++;
+    }
+  });
+  itemsLeft.innerHTML = `
+  <p><span class="smaller">
+    ${count} items left
+  </span></p>
+  `;
+}
+
+
 
 
