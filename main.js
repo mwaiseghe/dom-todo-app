@@ -202,6 +202,22 @@ function getItemsLeft() {
   `;
 }
 
+let mode_changer = document.querySelector('#change_mode');
+let main_container = document.querySelector('body');
+
+function changeMode(){
+  if (main_container.classList.contains('dark-mode')){
+    main_container.classList.remove('dark-mode');
+    mode_changer.classList.remove('dark-mode');
+    mode_changer.src = './images/icon-moon.svg';
+  }else{
+    main_container.classList.add('dark-mode');
+    mode_changer.classList.add('dark-mode');
+    mode_changer.src ='./images/icon-sun.svg';
+}
+}
+
+mode_changer.addEventListener('click', changeMode);
 
 
 
