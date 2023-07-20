@@ -53,16 +53,20 @@ function displayTodo() {
       items.innerHTML += `
       <div class="single-item">
         <input type="checkbox" name="" id="${item.id}" ${checked}>
-        <p class="completed item-p">${item.name}</p>
-        <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+        <div class="to-do-text">
+          <p class="completed item-p">${item.name}</p>
+          <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+        </div>
       </div>
       `;
     } else {
       items.innerHTML += `
       <div class="single-item">
         <input type="checkbox" name="" id="${item.id}" ${checked}>
-        <p class="item-p">${item.name}</p>
-        <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+        <div class="to-do-text">
+          <p class="item-p">${item.name}</p>
+          <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+        </div>
       </div>
       `;
     }
@@ -108,8 +112,10 @@ function displayActive() {
       items.innerHTML += `
       <div class="single-item">
         <input type="checkbox" name="" id="${item.id}">
-        <p class="item-p">${item.name}</p>
-        <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+        <div class="to-do-text">
+          <p class="item-p">${item.name}</p>
+          <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+        </div>
       </div>
       `;
     }
@@ -127,8 +133,10 @@ function displayCompleted() {
       items.innerHTML += `
       <div class="single-item">
         <input type="checkbox" name="" id="${item.id}" checked>
-        <p class="completed item-p">${item.name}</p>
-        <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+        <div class="to-do-text">
+          <p class="completed item-p">${item.name}</p>
+          <img src="./images/icon-cross.svg" alt="" id="${item.id}">
+        </div>
       </div>
       `;
     }

@@ -23,7 +23,7 @@ body {
 
 .main-card {
     width: 50%;
-    height: 80%;
+    height: 60%;
 
 }
 
@@ -127,8 +127,28 @@ body {
     background-color: rgb(22, 21, 21);
 }
 
-#change_mode {
-    
+.dark-mode .todoForm,
+.dark-mode .todoForm input[type="text"],
+.dark-mode .items,
+.dark-mode .single-item,
+.dark-mode .lower,
+.dark-mode .task-status {
+    background-color:  hsl(235, 21%, 11%);
+    color: white;
+}
+
+.dark-mode p {
+    border-radius: 10px;
+    color: white;
+}
+
+
+
+.to-do-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
 @media screen and (max-width:900px){
